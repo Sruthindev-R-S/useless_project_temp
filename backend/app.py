@@ -18,7 +18,8 @@ try:
 except ImportError:
     cv2 = None
 
-# Model paths
+
+
 ONNX_MODEL_PATH = Path("model/best.onnx")
 PT_MODEL_PATH = Path("model/best.pt")
 
