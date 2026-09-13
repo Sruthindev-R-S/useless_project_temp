@@ -1,7 +1,53 @@
-# Byte-compiled / optimized / DLL files
+# ==============================================================================
+# Unified .gitignore (Backend + Frontend + ML + Mobile + Cloud)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Environment Variables, Secrets & API Keys
+# ------------------------------------------------------------------------------
+.env
+.env.*
+*.env
+env.json
+secrets.dart
+*secret*
+*credentials*
+api_keys.dart
+*.local.dart
+
+# Security & Signing keys
+*.keystore
+*.jks
+key.properties
+*.pem
+*.key
+*.cert
+
+# Cloud service configuration
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+macos/Runner/GoogleService-Info.plist
+
+# ------------------------------------------------------------------------------
+# 2. Python & FastAPI Backend
+# ------------------------------------------------------------------------------
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
+.Python
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
 # Virtual environments
 .venv/
@@ -9,24 +55,86 @@ venv/
 ENV/
 env/
 
-# Environment variables
-.env
-.env.*
-
-# IDEs & Editors
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# Training/dataset artifacts
+# ML / YOLO training and dataset artifacts
 runs/
 dataset/
 dataset_real/
 ground_truth*
 crop_inspect/
 all_switch_crops/
+*.onnx_data
+
+# ------------------------------------------------------------------------------
+# 3. Flutter & Dart (Frontend)
+# ------------------------------------------------------------------------------
+**/.dart_tool/
+**/build/
+**/.pub/
+**/.pub-cache/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/doc/api/
+**/coverage/
+app.*.symbols
+app.*.map.json
+
+# ------------------------------------------------------------------------------
+# 4. Android
+# ------------------------------------------------------------------------------
+**/android/.gradle/
+**/android/local.properties
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
+**/android/**/build/
+
+# ------------------------------------------------------------------------------
+# 5. iOS & macOS
+# ------------------------------------------------------------------------------
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/ephemeral/
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/.last_build_id
+**/ios/Runner/GeneratedPluginRegistrant.*
+**/macos/Flutter/ephemeral/
+**/Pods/
+*.ipa
+*.app
+
+# ------------------------------------------------------------------------------
+# 6. Windows & Linux Desktop
+# ------------------------------------------------------------------------------
+**/windows/flutter/ephemeral/
+**/linux/flutter/ephemeral/
+
+# ------------------------------------------------------------------------------
+# 7. IDEs & Editors
+# ------------------------------------------------------------------------------
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+*.swp
+*.swo
+.atom/
+.buildlog/
+.history
+
+# ------------------------------------------------------------------------------
+# 8. OS Files & Miscellaneous Logs
+# ------------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+*.class
+*.log
+
+# API testing scratch scripts & payloads
+test_api.*
+api_test.*
+*.payload.json
+postman/
+*.postman_collection.json
+*.postman_environment.json
