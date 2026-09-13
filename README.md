@@ -10,42 +10,115 @@
 
 
 ### Team Members
-- Team Lead: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- Team Lead: Rhithujith P - School of engineering,CUSAT
+- Member 2: Sruthindev R S -School of engineering,CUSAT
+
 
 ### Project Description
-[2-3 lines about what your project does]
+Mobile App which count the number of Switches which have been turned on and will give memes according to it
 
 ### The Problem (that doesn't exist)
-[What ridiculous problem are you solving?]
+Blind Mobile users who can't see switchboard but can take pictures of it
 
 ### The Solution (that nobody asked for)
-[How are you solving it? Keep it fun!]
+Mobile App for counting switches
 
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- [Languages used]
-- [Frameworks used]
-- [Libraries used]
-- [Tools used]
+- Python,Dart
+- Fastapi
+- Numpy
+- Docker
 
 For Hardware:
-- [List main components]
-- [List specifications]
-- [List tools required]
+
 
 ### Implementation
 For Software:
+
+```mermaid
+flowchart TB
+	Start([User opens the mobile app]) --> Capture[User captures a clear image of the switchboard]
+	Capture --> Preview[Mobile app shows the captured image preview]
+	Preview --> Valid{Is the image clear and valid?}
+	Valid -- No --> Retake[Ask the user to retake the image]
+	Retake --> Capture
+	Valid -- Yes --> Prepare[Compress image and prepare API request]
+
+	subgraph Mobile[Mobile Application]
+		Capture
+		Preview
+		Valid
+		Retake
+		Prepare
+		Result[Receive switch count from server]
+		Meme[Select an appropriate meme for the switch count]
+		Display[Display switch count and selected meme]
+	end
+
+	Prepare --> Upload[Send image to the render server]
+
+	subgraph Server[Render Server]
+		Receive[Receive image request]
+		Check[Validate file format and request data]
+		Preprocess[Resize, normalize, and preprocess image]
+		Inference[Run the YOLO object-detection model]
+		Filter[Filter low-confidence detections]
+		Count[Count detected switches]
+		Response[Build JSON response with switch count]
+	end
+
+	Upload --> Receive
+	Receive --> Check
+	Check --> Preprocess
+	Preprocess --> Inference
+	Inference --> Filter
+	Filter --> Count
+	Count --> Response
+	Response --> Result
+	Result --> Meme
+	Meme --> Display
+	Display --> Finish([User views the result])
+
+	classDef user fill:#fff4cc,stroke:#c48a00,stroke-width:2px,color:#222;
+	classDef mobile fill:#dff3ff,stroke:#1677a8,stroke-width:2px,color:#222;
+	classDef server fill:#e5f7e5,stroke:#2d8a4e,stroke-width:2px,color:#222;
+	class Start,Finish user;
+	class Capture,Preview,Valid,Retake,Prepare,Result,Meme,Display mobile;
+	class Receive,Check,Preprocess,Inference,Filter,Count,Response server;
+```
+
 # Installation
-[commands]
+Front end:
+```bash
+cd frontend
+flutter pub get
+```
 
 # Run
-[commands]
+For debugging:
+```bash
+flutter run
+```
+
+To build the release APK:
+```bash
+flutter build apk --release
+```
+Backend:
+The backend is hosted on Render, so it does not need to be run locally for normal use. To test the backend locally:
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn app:app --reload
+```
+
 
 ### Project Documentation
 For Software:
+    Flutter : Flutter is used as it is crossplatform and easy
+    Python & fast api:Python is easy for 
 
 # Screenshots (Add at least 3)
 ![Screenshot1](Add screenshot 1 here with proper name)
